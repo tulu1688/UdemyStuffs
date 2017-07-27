@@ -11,6 +11,31 @@ query {
   }
 }
 
+# React
+## Appolo-React docs
+- Cach update: http://dev.apollodata.com/react/cache-updates.html
+## Fullstack problem
+- Need to show multiple pages: Use React Router for navigation
+- Need to store user data: Store in mongodb ...
+- Users shouldn't be able to see all details about other user:
+- Need to validate input:
+- Need some solution for authentication: Passport JS
+- Passport isn't designed with GraphQL in mind: 
+
+
+# DB tips
+- Use mlab.com for free mongodb
+
+# Some GraphQL clients
+## Lokka Client
+- Verry basic queries, mutations
+- Some simple caching
+## Apollo Client
+- The creator is also the man who created Meteor JS
+- Good
+## Relay
+- Good performance for mobile
+
 # Nodejs tips
 ## Create new npm project
 npm init
