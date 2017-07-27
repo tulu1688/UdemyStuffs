@@ -1,4 +1,3 @@
-
 - GraphQL -> help to solved problem when the RESTful routing is sophisticated.
 - Example: a query friend's company's name of a user
 query {
@@ -11,6 +10,8 @@ query {
   }
 }
 
+# Learn to be: Web developer / Mobile developer or Fullstack -> https://rallycoding.com/
+
 # React
 ## Appolo-React docs
 - Cach update: http://dev.apollodata.com/react/cache-updates.html
@@ -20,7 +21,7 @@ query {
 - Users shouldn't be able to see all details about other user:
 - Need to validate input:
 - Need some solution for authentication: Passport JS
-- Passport isn't designed with GraphQL in mind: 
+- Passport isn't designed with GraphQL in mind:
 
 
 # DB tips
