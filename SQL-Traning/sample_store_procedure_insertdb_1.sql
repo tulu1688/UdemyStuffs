@@ -1,0 +1,81 @@
+CREATE DEFINER=`root`@`localhost` PROCEDURE `add_agent`(in num int)
+BEGIN
+
+declare i int default 1;
+while i < num do
+INSERT INTO `agent`.`agent`
+(
+  `agent_type_id`,
+  `unique_reference`,
+  `kyc_status`,
+  `kyc_remark`,
+  `is_suspended`,
+  `created_timestamp`,
+  `is_deleted`,
+  `last_updated_timestamp`,
+  `firstName`,
+  `lastName`,
+  `date_of_birth`,
+  `gender`,
+  `national`,
+  `primary_identify_type`,
+  `primary_identify_id`,
+  `primary_place_of_issue`,
+  `primary_issue_date`,
+  `primary_expire_date`,
+  `secondary_identify_type`,
+  `secondary_identify_id`,
+  `secondary_place_of_issue`,
+  `secondary_issue_date`,
+  `secondary_expire_date`,
+  `nationality`,
+  `province`,
+  `district`,
+  `commune`,
+  `address`,
+  `primary_mobile_number`,
+  `secondary_mobile_number`,
+  `tertiary_mobile_number`,
+  `email`,
+  `parent_id`,
+  `grand_parent_id`
+)
+VALUES (
+  1,
+  i,
+  1,
+  'remark',
+  0,
+  CURRENT_TIMESTAMP,
+  0,
+  CURRENT_TIMESTAMP,
+  'firstname',
+  'lastname',
+  CURRENT_TIMESTAMP,
+  ELT(1 + FLOOR(RAND()*3), 'Male', 'Female', 'Both'),
+  ELT(1 + FLOOR(RAND()*3), 'Vietnam', 'Thailand', 'England'),
+  'primary_identify_type',
+  'primary_identify_id',
+  'primary_place_of_issue',
+  CURRENT_TIMESTAMP,
+  CURRENT_TIMESTAMP,
+  'secondary_identify_type',
+  'secondary_identify_id',
+  'secondary_place_of_issue',
+  CURRENT_TIMESTAMP,
+  CURRENT_TIMESTAMP,
+  ELT(1 + FLOOR(RAND()*3), 'Vietnam', 'Thailand', 'England'),
+  ELT(1 + FLOOR(RAND()*3), 'Hanoi', 'Bangkok', 'London'),
+  ELT(1 + FLOOR(RAND()*3), 'Hanoi', 'Bangkok', 'London'),
+  'commune',
+  'address',
+  '9876543210',
+  '0123456789',
+  'tertiary_mobile_number',
+  'email@gmail.com',
+  i,
+  i
+);
+set i = i + 1;
+end while;
+END
