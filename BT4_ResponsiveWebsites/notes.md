@@ -9,3 +9,6 @@ There are 3 way to download bootstrap
 # First final project: cover & navbar
 Install brackets code editor from brackets.io  
 Install emmet plugin for brackets editor  
+
+# Startup landing page
+Slogan generator [app](https://www.shopify.com/tools/slogan-maker)
