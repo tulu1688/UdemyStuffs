@@ -12,3 +12,10 @@ Install emmet plugin for brackets editor
 
 # Startup landing page
 Slogan generator [app](https://www.shopify.com/tools/slogan-maker)
+
+# Using sass in web projects
+1. Install sass
+> sudo gem install sass
+
+Show sass version
+> sass -v
