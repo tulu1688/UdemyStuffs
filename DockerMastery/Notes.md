@@ -9,7 +9,7 @@ __Run in background__
 docker container run --publish 80:80 --detach nginx  
 __List the running container__  
 docker container ls  
-__Stop the specific container by its id__
+__Stop the specific container by its id__  
 docker container stop e40116230261  
 __List all container that included the hidden (stoped) containers__  
 docker container ls -a  
@@ -69,7 +69,7 @@ docker inspect `container_name`
 __Show performance stats of all containers__  
 docker container stats  
 docker stats  
-__Clean up container after it stop. Using `--rm` option__
+__Clean up container after it stop. Using `--rm` option__  
 docker run --rm -it --name my_centos centos  
 
 ## Getting a shell inside containers
@@ -198,7 +198,84 @@ __Install Jekyll-serve docker__
 docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve  
 
 # Section 5: Making It Easier with Docker Compose: The Multi-Container Tool
+## Docker Compose
+* Compose configure relationship between containers  
+* Save docker containers run settings in easy-to-read file  
+* Create one-liner developer environment startups  
+* Comprise of 2 parts:
+> YAML file: containers, networks, volumes  
+> docker-compose: CLI tool  
 
+Docker compose commands:  
+> docker-compose up  
+> docker-compose down  
+> docker-compose up -d  : run in backgroud
+> docker-compose down -v : remove all volumes
+> docker-compose down --help : for more details
+
+Documentation for compose [link](docs.docker.com/compose/compose-file/)  
+
+## Adding image to build compose file
+
+# Section 6: Swarm, build-in orchestration
+Swarm mode is a clustering solution built inside Docker  
+## Basic example
+__Run docker show info to know swarm is active or not__  
+docker info  
+__Init swarm if swarm mode is inactive__  
+docker swarm init  
+`new master node will be created`
+__Show created nodes__  
+docker node ls  
+__Create a service__  
+docker service create alpine ping 8.8.8.8  
+__List the service__  
+docker service ls  
+__Show container of service__  
+docker service ps `service_name`  
+__Replicas service to 3__  
+docker service update `service_name` --replicas 3  
+docker service update `service_id` --replicas 3  
+__Remove docker service__  
+docker service rm `service_name`  
+docker service rm `service_id`  
+_notes:_ after remove docker services, the related containers will be deleted also  
+## Creating 3-node swarm
+__host options__  
+1. Play with docker: Use [play with docker](http://labs.play-with-docker.com/) to get free docker host in 4 hours  
+2. Install docker machine to local  
+> docker-machine create node1 --> to create a node  
+> docker-machine ssh node1 --> go to node1
+> docker-machine env node1
+
+__Example__  
+docker swarm init --advertise-addr 10.0.32.3 -> `init the master node and get the token string`  
+
+docker swarm join --token SWMTKN-1-1wysaoumeyswkm37i9wrxk6k84w750j2yqxcqt5lt1wdjsktxo-53de1pur9egtbg9wcbtoqqwzi 10.0.32.3:2377  -> `join master as a worker`  
+
+docker node update role manager node2 -> `update node2 to be the new manager`
+
+docker swarm join-token manager -> `generate join-token in master node and assign new node in manager mode`  
+
+docker swarm join --token SWMTKN-1-1wysaoumeyswkm37i9wrxk6k84w750j2yqxcqt5lt1wdjsktxo-c4tz60cp8qdb6cj7r6b4mp4sv 10.0.32.3:2377 -> `join new node as a manager`  
+
+docker service create --replicas 3 alpine ping 8.8.8.8 -> `run services with 3 replicas in all manager nodes`
+
+docker service ls --> `show docker services`  
+
+## Overlay Multi-Host Networking
+__Setup postgres image__  
+docker network create --driver overlay mydrupal  -> `Create new docker overlay network`  
+docker service create --name psql --network mydrupal -e POSTGRES_PASSWORD=mypass postgres  -> `Create new docker service using the created network above`  
+docker service ls  
+docker service ps psql  
+docker container logs psql.1.8921unkgsf7ciwkzib58t9mah  -> `Show logs of docker container attached with docker service`  
+__Setup drupal image__  
+docker service create --name drupal --network mydrupal -p 80:80 drupal -> `Create new service name drupal with same network`  
+docker service ps drupal  
+__=> Now we have a drupal website run load balancing__
+
+## Scaling out with routing mesh
 
 # Section 8: References
 * Journey to Docker Production  [link](https://www.youtube.com/watch?v=ZdUcKtg84T8)
