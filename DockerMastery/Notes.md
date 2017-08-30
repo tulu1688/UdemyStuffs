@@ -243,6 +243,8 @@ _notes:_ after remove docker services, the related containers will be deleted al
 ## Creating 3-node swarm
 __host options__  
 1. Play with docker: Use [play with docker](http://labs.play-with-docker.com/) to get free docker host in 4 hours  
+Play-with-docker provides share session feature  
+[Training](training.play-with-docker.com)  
 2. Install docker machine to local  
 > docker-machine create node1 --> to create a node  
 > docker-machine ssh node1 --> go to node1
@@ -275,7 +277,64 @@ docker service create --name drupal --network mydrupal -p 80:80 drupal -> `Creat
 docker service ps drupal  
 __=> Now we have a drupal website run load balancing__
 
-## Scaling out with routing mesh
+## Create multi-service app sample
+docker network create -d overlay backend  
+docker network create -d overlay frontend  
+docker service create --name vote -p 80:80 --network frontend --replicas 2 dockersamples/examplevotingapp_vote:before  
+docker service create --name redis --network frontend --replicas 1 redis:3.2    
+docker service create --name worker --network frontend --network backend dockersamples/examplevotingapp_worker  
+docker service create --name db --network backend --mount type=volume,source=/db-data,target=/var/lib/postgresql/data postgres:9.4  
+docker service create --name result --network backend -p 5001:80 dockersamples/examplevotingapp_result:before  
+
+## Stacks: Production Grade Compose
+- Stacks accepts compose files as their declarative definition for services, networks, and volumes  
+- use `docker stack deploy` rather than `docker service create`  
+
+> docker stack deploy -c example.yml `stack_name` -> Create stack  
+> docker stack ls -> show all stacks  
+> docker stack ps `stack_name`  -> show stack info by images  
+> docker stack service `stack_name` -> show stack info by services  
+> docker stack deploy -c example.yml `stack_name` -> Call again to update stack  
+
+## Swarm secrets: securely store config vars
+> docker secret create psql_user psql_user.txt  
+
+> echo "myDBPassword" | docker secret create -  -> read password from standard input  
+
+> docker secret ls  
+
+> docker service create --name psql --secret psql_user --secret psql_pass -e POSTGRES_PASSWORD_FILE=/run/secrets/psql_pass -e POSTGRES_USER_FILE=/run/secrets/psql_user postgres   
+
+> docker exec -it `container_name` bash -> go to bash shell of container of above service  
+
+> ls /run/secrets/ -> show secrets folder inside container shell  
+
+> cat /run/secrets/psql_user -> display psql_user  
+
+## Building stacks with linked secrets
+
+## Building secret with local docker compose
+
+# Section 7: Image storage and distribution
+__DockerHub__ allow to automatically create image from code after commit. DockerHub like a github for images  
+__DockerStore__ like an app store for images. Some production images are sole here  
+__DockerCloud__ web-based Docker Swarm creation/management. Automated image building, testing, and deployment. Includes a image security scanning service.  
+__Docker Registry__
+> docker container run -d -p 5000:5000 --name registry registry  
+> docker pull hello-world  
+> docker run hello-world
+> docker tag hello-world 127.0.0.1:5000/hello-world `retag image`  
+> docker push 127.0.0.1:5000/hello-world `push image to new registry`  
+> docker image remove hello-world  
+> docker image rm 127.0.0.1:5000/hello-world  
+> docker pull 127.0.0.1:5000/hello-world `pull image from new registry`  
+> docker run 127.0.0.1:5000/hello-world:latest  
+> docker container kill registry  
+> docker container rm registry  
+> docker container run -d -p 5000:5000 --name registry -v $(pwd)/registry-data:/var/lib/registry registry `re-create registry using a bind mount and see how it stores data`  
+> docker push 127.0.0.1:5000/hello-world `push the image to registry`  
+> tree registry-data/ `show the image stored in registry`  
+> docker system prune `clean up them all`  
 
 # Section 8: References
 * Journey to Docker Production  [link](https://www.youtube.com/watch?v=ZdUcKtg84T8)
