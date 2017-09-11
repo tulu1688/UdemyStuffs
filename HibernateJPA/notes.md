@@ -238,3 +238,44 @@ N/A
 ## Session and EntityManager similarities
 
 # Advanced Mappings and configuration
+## Compound Primary keys
+Using `IdClass` annotation when work with compound primary keys  
+
+## Compound Join Column
+Using `ManyToOne` annotation, `cascade` annotation, `JoinColumns` show all foreign keys in array  
+```
+@ManyToOne(cascade=CascadeType.ALL)
+@JoinColumns({
+  @JoinColumn(name="CURRENCY_NAME", referencedColumnName="NAME"),
+  @JoinColumn(name="COUNTRY_NAME", referencedColumnName="COUNTRY_NAME")
+})
+```
+
+## Enumeration
+Using `Enumerated` annotation and should use the `EnumType.String`  
+
+## Mapped superclass inheritance
+Use `MappedSuperclass` annotation for the parent class in a inheritance association  
+
+## Table per class inheritance
+- Dont really understand :(  
+
+## Single table strategy
+- Dont really understand :(  
+
+## Building a persistence layer
+
+## Schema generation
+```
+<property name="hbm2dll.auto">create/validate/update/create-drop</property>
+```
+
+# Hibernate query language and Java persistence query language
+
+## Join in HQL, JPQL
+
+## Lazy load
+Change the `fetch` feature in `ManyToOne` or `OneToMany` to `LAZY` or `EAGER`  
+
+# Criteria API
+Criteria API allows create complex queries via Criteria (Hibernate), and CriteriaQuery (JPA)  
