@@ -34,6 +34,7 @@ public void greetShouldThrowAnException_For_NameIsNull(){
 - Sample code is `OrderProcessingService`
 
 ## Add mockito dependency
+
 ```
 <dependency>
     <groupId>org.mockito</groupId>
@@ -42,3 +43,14 @@ public void greetShouldThrowAnException_For_NameIsNull(){
     <scope>test</scope>
 </dependency>
 ```
+
+## Stubbing and Setting expectation
+- See example in `OrderProcessingService`
+
+# Code coverage
+CodeCoverage Tool: EclEmma -> eclipse, IntelliJ build-in Code Coverage tool
+
+# More mockito
+- Mockito matcher: any(), anyInt(), anyLong()...
+- Mockito verification mode: atLeast, times
+- More example in `ScrapBook project`

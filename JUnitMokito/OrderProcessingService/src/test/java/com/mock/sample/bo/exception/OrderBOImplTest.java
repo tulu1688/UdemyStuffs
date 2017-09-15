@@ -11,6 +11,10 @@ import java.sql.SQLException;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -33,11 +37,11 @@ public class OrderBOImplTest{
     @Test
     public void placeOrder_Should_Create_An_Order() throws SQLException, BOException{
         Order order = new Order();
-        when(dao.create(order)).thenReturn(new Integer(1));
+        when(dao.create(any(Order.class))).thenReturn(new Integer(1));
         boolean result = bo.placeOrder(order);
 
         assertTrue(result);
-        verify(dao).create(order);
+        verify(dao, times(2)).create(order);
     }
 
     @Test
@@ -85,7 +89,7 @@ public class OrderBOImplTest{
 
     @Test(expected = BOException.class)
     public void cancelOrder_Should_ThrowABOException() throws SQLException, BOException{
-        when(dao.read(123)).thenThrow(SQLException.class);
+        when(dao.read(anyInt())).thenThrow(SQLException.class);
         bo.cancelOrder(123);
     }
 
@@ -95,5 +99,13 @@ public class OrderBOImplTest{
         when(dao.read(123)).thenReturn(order);
         when(dao.update(order)).thenThrow(SQLException.class);
         bo.cancelOrder(123);
+    }
+
+    @Test
+    public void deleteOrder_Deletes_The_Order() throws SQLException, BOException {
+        when(dao.delete(123)).thenReturn(1);
+        boolean result = bo.deleteOrder(123);
+        assertTrue(result);
+        verify(dao).delete(123);
     }
 }
