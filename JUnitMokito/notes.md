@@ -105,3 +105,5 @@ PowerMock use bytecode manipulation so it can test exteded object
 PowerMock has similar with Mockito
 
 Example in `UserAdminService` project
+
+# Section 10: Spring test
