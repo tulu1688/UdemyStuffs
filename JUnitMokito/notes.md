@@ -94,3 +94,14 @@ Parts of test double: Dummy, Stubs, Mocks, Fake, Spies
 - Example: `calculator` project
 
 # Section 9: Power mock
+PowerMock extend feature of Mockito and EasyMock  
+
+Mockito limitations: can't mock static methods, final methods, constructors, private methods, enums
+
+Mockito use proxy pattern for easy implementing Mock unit test. So if we need to test a extended class -> no way to do it
+
+PowerMock use bytecode manipulation so it can test exteded object
+
+PowerMock has similar with Mockito
+
+Example in `UserAdminService` project
