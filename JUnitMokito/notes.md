@@ -47,10 +47,50 @@ public void greetShouldThrowAnException_For_NameIsNull(){
 ## Stubbing and Setting expectation
 - See example in `OrderProcessingService`
 
-# Code coverage
+# Section 5: Code coverage
 CodeCoverage Tool: EclEmma -> eclipse, IntelliJ build-in Code Coverage tool
 
-# More mockito
+# Section 6: More mockito
 - Mockito matcher: any(), anyInt(), anyLong()...
 - Mockito verification mode: atLeast, times
 - More example in `ScrapBook project`
+
+# Section 7: Best practices and Patterns
+## The F.I.R.S.T principle
+F: fast
+I: independent
+R: repeatable
+S: self-validating
+T: timely
+
+## Test double
+Test double is a design pattern used in unit testing framework
+
+Parts of test double: Dummy, Stubs, Mocks, Fake, Spies
+
+## Test double in Mockito
+- Dummy: `any(Object.class)`
+- Stubs: `when(...).return(...)`
+- Mocks: exception, verify
+- Fake: inmemory database used when mockito run the testcases
+- Spies: partial mocking
+
+## Partial mocking using mockito spy
+- See ListTest.java in `OrderProcessingService` code
+
+## Spy vs Mock
+- Technically speaking both "mocks" and "spies" are a special kind of "test doubles".
+- Mockito is unfortunately making the distinction weird.
+  - A mock in mockito is a normal mock in other mocking frameworks (allows you to stub invocations; that is, return specific values out of method calls).
+  - A spy in mockito is a partial mock in other mocking frameworks (part of the object will be mocked and part will use real method invocations)
+- Typical use case for Spy: the class has a parameterized constructor, you want to create the object first.
+
+## Maven and JUnit quickstart
+- Some well-known maven archetype
+  - `maven-archetype-quickstart`
+  - `maven-archetype-webapp`
+
+# Section 8: Parameterized JUnit
+- Example: `calculator` project
+
+# Section 9: Power mock

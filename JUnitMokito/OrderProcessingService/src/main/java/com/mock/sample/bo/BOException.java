@@ -1,4 +1,4 @@
-package com.mock.sample.bo.exception;
+package com.mock.sample.bo;
 
 import java.sql.SQLException;
 

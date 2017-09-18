@@ -1,6 +1,5 @@
 package com.mock.sample.bo;
 
-import com.mock.sample.bo.exception.BOException;
 import com.mock.sample.dto.Order;
 
 /**

@@ -1,4 +1,4 @@
-package com.mock.sample.bo.exception;
+package com.mock.sample.bo;
 
 import com.mock.sample.dao.OrderDAO;
 import com.mock.sample.dto.Order;
@@ -13,7 +13,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -41,7 +40,7 @@ public class OrderBOImplTest{
         boolean result = bo.placeOrder(order);
 
         assertTrue(result);
-        verify(dao, times(2)).create(order);
+        verify(dao).create(order);
     }
 
     @Test
