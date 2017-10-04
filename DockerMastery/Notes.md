@@ -1,3 +1,7 @@
+# My docker tips
+- Please Pin Your Docker Image Versions. It will save us ton of time in the future. [Link](https://nickjanetakis.com/blog/docker-tip-18-please-pin-your-docker-image-versions)
+- Simple dockerfile for a nodejs app. [Link](https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2#get-your-node-app-into-the-image)
+
 # Section 2: Creating and Using Containers Like a Boss
 ## Starting a Nginx web server
 __Showing docker info__  
@@ -199,19 +203,19 @@ docker run -p 80:4000 -v $(pwd):/site bretfisher/jekyll-serve
 
 # Section 5: Making It Easier with Docker Compose: The Multi-Container Tool
 ## Docker Compose
-* Compose configure relationship between containers  
-* Save docker containers run settings in easy-to-read file  
-* Create one-liner developer environment startups  
-* Comprise of 2 parts:
-> YAML file: containers, networks, volumes  
-> docker-compose: CLI tool  
+- Compose configure relationship between containers  
+- Save docker containers run settings in easy-to-read file  
+- Create one-liner developer environment startups  
+- Comprise of 2 parts:
+  - YAML file: containers, networks, volumes  
+  - docker-compose: CLI tool  
 
-Docker compose commands:  
-> docker-compose up  
-> docker-compose down  
-> docker-compose up -d  : run in backgroud
-> docker-compose down -v : remove all volumes
-> docker-compose down --help : for more details
+- Docker compose commands:  
+  - docker-compose up  
+  - docker-compose down  
+  - docker-compose up -d  : run in backgroud
+  - docker-compose down -v : remove all volumes
+  - docker-compose down --help : for more details
 
 Documentation for compose [link](docs.docker.com/compose/compose-file/)  
 
