@@ -271,6 +271,7 @@ Use `MappedSuperclass` annotation for the parent class in a inheritance associat
 ```
 
 # Hibernate query language and Java persistence query language
+The code in Chapter11 includes sample for: Filtering Data, Paging, and Simple Selection  
 
 ## Join in HQL, JPQL
 
