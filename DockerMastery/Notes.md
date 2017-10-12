@@ -1,6 +1,19 @@
 # My docker tips
 - Please Pin Your Docker Image Versions. It will save us ton of time in the future. [Link](https://nickjanetakis.com/blog/docker-tip-18-please-pin-your-docker-image-versions)
 - Simple dockerfile for a nodejs app. [Link](https://developer.okta.com/blog/2017/08/28/developers-guide-to-docker-part-2#get-your-node-app-into-the-image)
+- Clean docker unused data
+```
+docker system prune
+
+## or we can use each line below
+docker container prune
+docker image prune
+docker network prune
+docker volume prune
+
+## or best choice
+docker system prune -af
+```
 
 # Section 2: Creating and Using Containers Like a Boss
 ## Starting a Nginx web server
